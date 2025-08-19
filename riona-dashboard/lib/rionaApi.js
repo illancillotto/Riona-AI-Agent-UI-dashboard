@@ -1,5 +1,5 @@
 // lib/rionaApi.js
-const BASE = process.env.NEXT_PUBLIC_RIONA_API || "http://localhost:3000";
+const BASE = process.env.NEXT_PUBLIC_RIONA_API || "http://localhost:3099";
 
 async function api(path, opts = {}) {
   const res = await fetch(`${BASE}${path}`, { 

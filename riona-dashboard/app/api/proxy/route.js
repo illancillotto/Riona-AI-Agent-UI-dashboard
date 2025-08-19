@@ -6,7 +6,7 @@ export async function POST(request) {
     const body = await request.json();
     const { path, method = 'POST', payload = {} } = body;
     
-    const backendUrl = process.env.NEXT_PUBLIC_RIONA_API || 'http://localhost:3000';
+    const backendUrl = process.env.NEXT_PUBLIC_RIONA_API || 'http://localhost:3099';
     
     const response = await fetch(`${backendUrl}${path}`, {
       method,
@@ -51,7 +51,7 @@ export async function GET(request) {
       );
     }
     
-    const backendUrl = process.env.NEXT_PUBLIC_RIONA_API || 'http://localhost:3000';
+    const backendUrl = process.env.NEXT_PUBLIC_RIONA_API || 'http://localhost:3099';
     
     const response = await fetch(`${backendUrl}${path}`, {
       method: 'GET',

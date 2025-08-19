@@ -8,7 +8,7 @@ The Riona Dashboard is **complete and ready to use**!
 - ✅ Next.js 15 App Router configured
 - ✅ All dependencies installed successfully  
 - ✅ Production build completes without errors
-- ✅ Development server starts on http://localhost:3000
+- ✅ Development server starts on http://localhost:3099
 - ✅ All pages and components implemented
 - ✅ Responsive design works across devices
 
@@ -31,7 +31,7 @@ The Riona Dashboard is **complete and ready to use**!
 
 4. **Open your browser:**
    ```
-   http://localhost:3000
+   http://localhost:3099
    ```
 
 ## 📋 Features Implemented
@@ -65,7 +65,7 @@ The Riona Dashboard is **complete and ready to use**!
 
 ## 🔌 Backend Integration
 
-The dashboard is designed to work with your existing Riona AI Agent backend at `http://localhost:3000` (configurable).
+The dashboard is designed to work with your existing Riona AI Agent backend at `http://localhost:3099` (configurable).
 
 ### Supported Backend Endpoints:
 - `POST /api/login` - Instagram authentication
@@ -112,7 +112,7 @@ vercel --prod
 ### Docker:
 ```bash
 docker build -t riona-dashboard .
-docker run -p 3000:3000 riona-dashboard
+docker run -p 3099:3099 riona-dashboard
 ```
 
 ### Manual:

@@ -14,8 +14,8 @@ async function startServer() {
     process.exit(1);
   }
 
-  const server = app.listen(process.env.PORT || 3000, () => {
-    logger.info(`Server is running on port ${process.env.PORT || 3000}`);
+  const server = app.listen(process.env.PORT || 3099, () => {
+    logger.info(`Server is running on port ${process.env.PORT || 3099}`);
   });
 
   process.on("SIGTERM", () => {

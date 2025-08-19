@@ -41,14 +41,14 @@ A modern, responsive web dashboard for managing the Riona AI Agent backend. Buil
 
 4. **Open Dashboard**
    ```
-   http://localhost:3000
+   http://localhost:3099
    ```
 
 ## Environment Variables
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `NEXT_PUBLIC_RIONA_API` | Backend API URL | `http://localhost:3000` |
+| `NEXT_PUBLIC_RIONA_API` | Backend API URL | `http://localhost:3099` |
 
 ## Project Structure
 
@@ -168,7 +168,7 @@ npm run lint     # Run ESLint
 docker build -t riona-dashboard .
 
 # Run container
-docker run -p 3000:3000 riona-dashboard
+docker run -p 3099:3099 riona-dashboard
 ```
 
 ### Manual Deployment

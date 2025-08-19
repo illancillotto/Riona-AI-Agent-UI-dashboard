@@ -15,7 +15,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run train:youtube` - Train the AI model with YouTube video transcripts
 
 ### Development
-- Server runs on port 3000 (or PORT environment variable)
+- Server runs on port 3099 (or PORT environment variable)
 - TypeScript source in `src/`, compiled output in `build/`
 - MongoDB required for data persistence
 
@@ -86,7 +86,7 @@ MONGODB_URI=mongodb://localhost:27017/instagram-ai-agent
 SESSION_SECRET=your_secret_key
 
 # Server
-PORT=3000
+PORT=3099
 NODE_ENV=production|development
 ```
 

@@ -1,12 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { 
-  Save, 
-  Eye, 
-  EyeOff, 
-  TestTube, 
-  CheckCircle, 
+import {
+  Save,
+  Eye,
+  EyeOff,
+  TestTube,
+  CheckCircle,
   XCircle,
   Database,
   Key,
@@ -18,7 +18,7 @@ import { Riona, isOnline } from '../lib/rionaApi';
 
 export default function SettingsForm() {
   const [settings, setSettings] = useState({
-    backendUrl: process.env.NEXT_PUBLIC_RIONA_API || 'http://localhost:3000',
+    backendUrl: process.env.NEXT_PUBLIC_RIONA_API || 'http://localhost:3099',
     mongoUri: '',
     igUsername: '',
     igPassword: '',
@@ -27,7 +27,7 @@ export default function SettingsForm() {
     proxyUsername: '',
     proxyPassword: ''
   });
-  
+
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [testing, setTesting] = useState({});
@@ -61,7 +61,7 @@ export default function SettingsForm() {
     try {
       await Riona.saveSettings(settings);
       showToast('Settings saved successfully', 'success');
-      
+
       // Check connection with new settings
       setTimeout(checkConnection, 1000);
     } catch (error) {
@@ -74,10 +74,10 @@ export default function SettingsForm() {
 
   const testConnection = async (type) => {
     setTesting(prev => ({ ...prev, [type]: true }));
-    
+
     try {
       let result = false;
-      
+
       switch (type) {
         case 'backend':
           result = await isOnline();
@@ -97,12 +97,12 @@ export default function SettingsForm() {
         default:
           result = false;
       }
-      
+
       showToast(
         result ? `${type} connection successful` : `${type} connection failed`,
         result ? 'success' : 'error'
       );
-      
+
       return result;
     } catch (error) {
       showToast(`${type} test failed: ${error.message}`, 'error');
@@ -211,7 +211,7 @@ export default function SettingsForm() {
                 value={settings.backendUrl}
                 onChange={(e) => updateSetting('backendUrl', e.target.value)}
                 className="flex-1 px-3 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-sm"
-                placeholder="http://localhost:3000"
+                placeholder="http://localhost:3099"
               />
               <button
                 onClick={() => testConnection('backend')}
