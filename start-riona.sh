@@ -128,7 +128,7 @@ start_frontend() {
     # Controllo se il frontend è attivo
     if kill -0 $FRONTEND_PID 2>/dev/null; then
         log_success "Frontend avviato con successo (PID: $FRONTEND_PID)"
-        log_info "Frontend disponibile su: http://localhost:3000"
+        log_info "Frontend disponibile su: http://localhost:3050"
     else
         log_error "Errore nell'avvio del frontend"
         exit 1
@@ -142,7 +142,7 @@ main() {
     echo "║                    RIONA AI LAUNCHER                        ║"
     echo "║                                                              ║"
     echo "║  Backend:  http://localhost:${PORT:-3099}                    ║"
-    echo "║  Frontend: http://localhost:3000                            ║"
+    echo "║  Frontend: http://localhost:3050                            ║"
     echo "╚══════════════════════════════════════════════════════════════╝"
     echo -e "${NC}"
     
@@ -170,7 +170,7 @@ main() {
     echo ""
     echo -e "${BLUE}Servizi attivi:${NC}"
     echo -e "  • Backend:  ${GREEN}http://localhost:${PORT:-3099}${NC}"
-    echo -e "  • Frontend: ${GREEN}http://localhost:3000${NC}"
+    echo -e "  • Frontend: ${GREEN}http://localhost:3050${NC}"
     echo ""
     echo -e "${YELLOW}Premi Ctrl+C per arrestare tutti i servizi${NC}"
     echo ""

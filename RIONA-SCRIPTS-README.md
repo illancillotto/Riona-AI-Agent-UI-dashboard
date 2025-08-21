@@ -28,7 +28,7 @@ Questo pacchetto contiene script automatizzati per gestire facilmente i servizi 
 - ✅ Installa dipendenze se necessario
 - ✅ Compila TypeScript backend
 - ✅ Avvia backend su porta 3099
-- ✅ Avvia frontend su porta 3000
+- ✅ Avvia frontend su porta 3050
 - ✅ Monitora lo stato dei servizi
 - ✅ Gestisce arresto pulito con Ctrl+C
 
@@ -38,14 +38,14 @@ Questo pacchetto contiene script automatizzati per gestire facilmente i servizi 
 ║                    RIONA AI LAUNCHER                        ║
 ║                                                              ║
 ║  Backend:  http://localhost:3099                            ║
-║  Frontend: http://localhost:3000                            ║
+║  Frontend: http://localhost:3050                            ║
 ╚══════════════════════════════════════════════════════════════╝
 
 🎉 Riona AI è ora in esecuzione!
 
 Servizi attivi:
   • Backend:  http://localhost:3099
-  • Frontend: http://localhost:3000
+  • Frontend: http://localhost:3050
 
 Premi Ctrl+C per arrestare tutti i servizi
 ```
@@ -58,7 +58,7 @@ Premi Ctrl+C per arrestare tutti i servizi
 **Cosa fa:**
 - 🔍 Trova processi attivi per porta e nome
 - 🛑 Arresta backend (porta 3099)
-- 🛑 Arresta frontend (porta 3000)
+- 🛑 Arresta frontend (porta 3050)
 - ⚠️ Forza arresto se necessario
 - ✅ Conferma arresto completo
 
@@ -93,7 +93,7 @@ PORT=4000 ./start-riona.sh
 ```bash
 # Controlla porte attive
 lsof -i :3099  # Backend
-lsof -i :3000  # Frontend
+lsof -i :3050  # Frontend
 
 # Controlla processi Node.js
 ps aux | grep node
@@ -109,7 +109,7 @@ ps aux | grep node
 ### Servizio Non Si Avvia
 1. Controlla prerequisiti: `node --version`, `npm --version`
 2. Verifica dipendenze: `npm install` nella directory corretta
-3. Controlla porte libere: `lsof -i :3099` e `lsof -i :3000`
+3. Controlla porte libere: `lsof -i :3099` e `lsof -i :3050`
 4. Verifica file di configurazione
 
 ### Porta Già in Uso

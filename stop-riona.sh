@@ -115,8 +115,8 @@ main() {
     # Arresto backend (porta 3099)
     stop_service_by_port 3099 "Backend"
     
-    # Arresto frontend (porta 3000)
-    stop_service_by_port 3000 "Frontend"
+    # Arresto frontend (porta 3050)
+stop_service_by_port 3050 "Frontend"
     
     # Arresto processi Node.js specifici per sicurezza
     stop_service_by_name "Node.js Backend" "node.*build/index.js"
@@ -126,7 +126,7 @@ main() {
     log_info "Controllo finale servizi..."
     
     local backend_running=$(lsof -ti:3099 2>/dev/null)
-    local frontend_running=$(lsof -ti:3000 2>/dev/null)
+    local frontend_running=$(lsof -ti:3050 2>/dev/null)
     
     if [ -z "$backend_running" ] && [ -z "$frontend_running" ]; then
         log_success "🎉 Tutti i servizi Riona AI sono stati arrestati con successo!"

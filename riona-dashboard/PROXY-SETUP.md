@@ -34,7 +34,7 @@ NEXT_PUBLIC_RIONA_API=/api/riona             # Proxy endpoint (client-side)
 npm start
 ```
 
-### 2. **Avvia Dashboard** (porta 3000 o 3001)
+### 2. **Avvia Dashboard** (porta 3050 o 3001)
 ```bash
 # Nella directory riona-dashboard
 npm run dev

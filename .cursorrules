@@ -1,0 +1,231 @@
+# Riona AI Agent - Cursor Rules
+
+## Project Overview
+Riona AI Agent è una piattaforma di automazione per social media con architettura backend-frontend separata:
+- **Backend**: Node.js/TypeScript con Express, MongoDB, Puppeteer/Playwright
+- **Frontend**: Next.js 15 con Tailwind CSS e componenti shadcn/ui
+- **Scopo**: Automatizzare interazioni su Instagram e altri social media usando AI
+
+## Backend Rules (src/)
+
+### TypeScript & Node.js
+- Usa TypeScript strict mode con target ES6
+- Segui le convenzioni Node.js per la struttura delle cartelle
+- Implementa sempre tipi espliciti per API, database e configurazioni
+- Usa async/await invece di Promise.then()
+- Gestisci sempre gli errori con try/catch e logging
+
+### Express & API
+- Usa middleware helmet per sicurezza HTTP
+- Implementa CORS per comunicazione cross-origin
+- Usa express-session per gestione sessioni
+- Struttura le route in moduli separati sotto `/routes/`
+- Valida sempre input e sanitizza output
+- Usa status HTTP appropriati (200, 201, 400, 401, 500)
+
+### Database & MongoDB
+- Usa Mongoose per modelli e schemi
+- Implementa connessione robusta con gestione errori
+- Usa indici appropriati per performance
+- Implementa validazione schema lato database
+- Gestisci connessioni con pattern connection pooling
+
+### Social Media Automation
+- Usa Puppeteer/Playwright per browser automation
+- Implementa rate limiting per evitare ban
+- Usa user-agents realistici e rotazione
+- Gestisci sessioni e cookie appropriatamente
+- Implementa retry logic per operazioni fallite
+- Logga tutte le operazioni per debugging
+
+### AI & Content Generation
+- Usa Google Generative AI per generazione contenuti
+- Implementa character-based prompting per tono di voce
+- Valida e sanitizza output AI prima dell'uso
+- Implementa fallback per errori AI
+- Cache risultati AI quando appropriato
+
+### Logging & Monitoring
+- Usa Winston per logging strutturato
+- Implementa log rotation per performance
+- Logga errori, warning e info appropriatamente
+- Usa livelli di log appropriati (error, warn, info, debug)
+- Implementa monitoring per operazioni critiche
+
+## Frontend Rules (riona-dashboard/)
+
+### Next.js 15 & React
+- Usa App Router (default in Next.js 15)
+- Implementa componenti funzionali con hooks
+- Usa 'use client' solo quando necessario
+- Implementa error boundaries per gestione errori
+- Usa Image component di Next.js per ottimizzazione
+
+### Styling & UI
+- Usa Tailwind CSS per styling
+- Implementa design system con CSS variables
+- Supporta dark mode con classi CSS
+- Usa componenti shadcn/ui per consistenza
+- Implementa responsive design mobile-first
+- Usa CSS Grid e Flexbox appropriatamente
+
+### State Management
+- Usa React hooks per state locale
+- Implementa context per state globale quando necessario
+- Usa localStorage per preferenze utente
+- Implementa optimistic updates per UX
+- Gestisci loading states appropriatamente
+
+### API Communication
+- Usa fetch API o axios per chiamate HTTP
+- Implementa error handling robusto
+- Usa SSE per streaming real-time
+- Implementa retry logic per fallimenti
+- Gestisci stati di loading e error appropriatamente
+
+### Component Architecture
+- Crea componenti riutilizzabili e modulari
+- Implementa prop validation con PropTypes o TypeScript
+- Usa composition over inheritance
+- Implementa lazy loading per performance
+- Separa logica di business da presentazione
+
+## General Development Rules
+
+### Code Quality
+- Usa ESLint e Prettier per formattazione
+- Implementa unit tests per logica critica
+- Usa nomi descrittivi per variabili e funzioni
+- Commenta codice complesso o non ovvio
+- Segui principi SOLID e DRY
+
+### Security
+- Non committare mai credenziali o API keys
+- Usa variabili d'ambiente per configurazioni sensibili
+- Implementa rate limiting per API endpoints
+- Valida e sanitizza sempre input utente
+- Usa HTTPS in produzione
+
+### Performance
+- Implementa caching appropriato
+- Ottimizza bundle size frontend
+- Usa lazy loading per componenti pesanti
+- Implementa paginazione per liste lunghe
+- Monitora performance con Lighthouse
+
+### Error Handling
+- Implementa error boundaries React
+- Gestisci errori API appropriatamente
+- Fornisci messaggi di errore user-friendly
+- Logga errori per debugging
+- Implementa fallback UI per stati di errore
+
+### Testing
+- Scrivi test per logica critica
+- Testa componenti UI con React Testing Library
+- Implementa integration tests per API
+- Usa mocks appropriati per dipendenze esterne
+- Mantieni coverage test >80%
+
+### Documentation
+- Documenta API endpoints con JSDoc
+- Mantieni README aggiornato
+- Documenta setup e deployment
+- Commenta decisioni architetturali complesse
+- Fornisci esempi di utilizzo
+
+## File Structure Conventions
+
+### Backend (src/)
+```
+src/
+├── Agent/           # Logica agent AI
+├── api/            # Endpoints API
+├── config/         # Configurazioni
+├── routes/         # Route handlers
+├── services/       # Business logic
+├── types/          # TypeScript types
+└── utils/          # Utility functions
+```
+
+### Frontend (riona-dashboard/)
+```
+riona-dashboard/
+├── app/            # Next.js App Router pages
+├── components/     # React components
+├── lib/           # Utility functions
+└── public/        # Static assets
+```
+
+## Naming Conventions
+
+### Backend
+- File: kebab-case (es: `instagram-client.ts`)
+- Classi: PascalCase (es: `InstagramClient`)
+- Funzioni: camelCase (es: `loginUser`)
+- Costanti: UPPER_SNAKE_CASE (es: `MAX_RETRY_ATTEMPTS`)
+- Interfacce: PascalCase con prefisso I (es: `IUser`)
+
+### Frontend
+- File: PascalCase per componenti (es: `CharacterCard.jsx`)
+- File: camelCase per utilities (es: `rionaApi.js`)
+- Componenti: PascalCase (es: `CharacterCard`)
+- Props: camelCase (es: `characterName`)
+- CSS classes: kebab-case (es: `character-card`)
+
+## Environment & Configuration
+
+### Backend (.env)
+```
+PORT=3099
+MONGODB_URI=mongodb://localhost:27017/riona
+SESSION_SECRET=your-secret-key
+GOOGLE_AI_API_KEY=your-api-key
+INSTAGRAM_USERNAME=your-username
+INSTAGRAM_PASSWORD=your-password
+```
+
+### Frontend (.env.local)
+```
+NEXT_PUBLIC_API_URL=http://localhost:3099
+NEXT_PUBLIC_SSE_URL=http://localhost:3099/api/riona/stream
+```
+
+## Deployment & DevOps
+
+### Backend
+- Usa PM2 per process management
+- Implementa health checks
+- Monitora memory e CPU usage
+- Usa environment-specific configs
+- Implementa graceful shutdown
+
+### Frontend
+- Build ottimizzato per produzione
+- Implementa service worker per caching
+- Usa CDN per assets statici
+- Monitora Core Web Vitals
+- Implementa error tracking
+
+## Social Media Best Practices
+
+### Instagram Automation
+- Rispetta rate limits (max 100 likes/ora)
+- Usa hashtag appropriati e variati
+- Implementa delays realistici tra azioni
+- Monitora engagement e follower growth
+- Evita comportamenti bot-like
+
+### Content Generation
+- Mantieni tono di voce consistente
+- Usa character JSON per personalità
+- Implementa content moderation
+- Varia contenuti per evitare spam
+- Monitora performance dei post
+
+### Safety & Compliance
+- Rispetta ToS delle piattaforme
+- Implementa content filtering
+- Monitora per attività sospette
+- Mantieni backup dei dati
+- Implementa audit logging
