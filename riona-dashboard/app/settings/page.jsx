@@ -1,9 +1,37 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Settings as SettingsIcon } from 'lucide-react';
 import SettingsForm from '../../components/SettingsForm';
+import LoginForm from '../../components/LoginForm';
+import { Riona } from '../../lib/rionaApi';
 
 export default function SettingsPage() {
+  const [authenticated, setAuthenticated] = useState(null);
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  const checkAuth = async () => {
+    try {
+      await Riona.me();
+      setAuthenticated(true);
+    } catch (error) {
+      if (error.message.includes('Not authenticated') || error.message.includes('401')) {
+        setAuthenticated(false);
+      }
+    }
+  };
+
+  // Show login form if not authenticated
+  if (authenticated === false) {
+    return <LoginForm onLoginSuccess={() => {
+      setAuthenticated(null);
+      checkAuth();
+    }} />;
+  }
+
   return (
     <div className="space-y-6">
       {/* Header */}

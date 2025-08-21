@@ -28,6 +28,33 @@ router.get('/status', (_req: Request, res: Response) => {
     return res.json(status);
 });
 
+// Characters endpoint
+router.get('/characters', async (_req: Request, res: Response) => {
+    try {
+        const charactersDir = path.join(__dirname, '../Agent/characters');
+        const files = await fs.readdir(charactersDir);
+        const characterFiles = files.filter(file => file.endsWith('.json'));
+        
+        const characters = await Promise.all(
+            characterFiles.map(async (file) => {
+                const filePath = path.join(charactersDir, file);
+                const content = await fs.readFile(filePath, 'utf-8');
+                const character = JSON.parse(content);
+                return {
+                    filename: file,
+                    name: character.name || file.replace('.json', ''),
+                    ...character
+                };
+            })
+        );
+        
+        return res.json(characters);
+    } catch (error) {
+        logger.error('Error loading characters:', error);
+        return res.status(500).json({ error: 'Failed to load characters' });
+    }
+});
+
 // Login endpoint
 router.post('/login', async (req: Request, res: Response) => {
   try {
@@ -75,6 +102,27 @@ router.delete('/clear-cookies', async (req, res) => {
       res.status(500).json({ success: false, message: 'Failed to clear cookies.', error: err.message });
     }
   }
+});
+
+// Settings endpoint (requires auth)
+router.get('/settings', requireAuth, async (_req: Request, res: Response) => {
+    try {
+        // For now, return a basic settings object
+        const settings = {
+            instagram: {
+                enabled: true,
+                autoInteract: false
+            },
+            ai: {
+                model: 'gemini-2.0-flash-exp',
+                temperature: 0.7
+            }
+        };
+        return res.json(settings);
+    } catch (error) {
+        logger.error('Error loading settings:', error);
+        return res.status(500).json({ error: 'Failed to load settings' });
+    }
 });
 
 // All routes below require authentication

@@ -38,7 +38,7 @@ export const Riona = {
   // Characters - endpoint che potrebbero essere implementati nel backend
   listCharacters: async () => {
     try {
-      return await api("/characters");
+      return await api("/api/characters");
     } catch (error) {
       // Fallback to mock data if no endpoint available
       console.warn('Characters endpoint not available, using mock data');

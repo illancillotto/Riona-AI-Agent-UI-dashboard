@@ -12,6 +12,7 @@ import {
   Heart
 } from 'lucide-react';
 import StatCard from '../../components/StatCard';
+import LoginForm from '../../components/LoginForm';
 import { Riona, isOnline } from '../../lib/rionaApi';
 
 export default function Dashboard() {
@@ -24,6 +25,7 @@ export default function Dashboard() {
   
   const [loading, setLoading] = useState(true);
   const [online, setOnline] = useState(false);
+  const [authenticated, setAuthenticated] = useState(null); // null = checking, true = authenticated, false = not authenticated
 
   useEffect(() => {
     loadDashboardData();
@@ -56,6 +58,7 @@ export default function Dashboard() {
         // Check Instagram session
         try {
           const userData = await Riona.me();
+          setAuthenticated(true);
           setStats(prev => ({
             ...prev,
             instagram: { 
@@ -64,6 +67,9 @@ export default function Dashboard() {
             }
           }));
         } catch (error) {
+          if (error.message.includes('Not authenticated') || error.message.includes('401')) {
+            setAuthenticated(false);
+          }
           setStats(prev => ({
             ...prev,
             instagram: { status: 'logged_out', session: false }
@@ -96,6 +102,14 @@ export default function Dashboard() {
   ];
 
   const maxActions = Math.max(...chartData.map(d => d.actions));
+
+  // Show login form if not authenticated
+  if (authenticated === false) {
+    return <LoginForm onLoginSuccess={() => {
+      setAuthenticated(null);
+      loadDashboardData();
+    }} />;
+  }
 
   return (
     <div className="space-y-6">

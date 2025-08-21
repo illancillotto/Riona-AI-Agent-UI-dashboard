@@ -18,6 +18,7 @@ const ALLOW = [
   "/api/scrape-followers",
   "/api/clear-cookies",
   "/api/exit",
+  "/api/characters",
   "/characters",
   /^\/characters\/[^/]+$/,
   "/characters/select",
@@ -55,7 +56,8 @@ export async function PATCH(request, ctx)  { return proxy(request, ctx); }
 export async function DELETE(request, ctx) { return proxy(request, ctx); }
 
 async function proxy(request, { params }) {
-  const subpath = "/" + (Array.isArray(params?.path) ? params.path.join("/") : "");
+  const awaitedParams = await params;
+  const subpath = "/" + (Array.isArray(awaitedParams?.path) ? awaitedParams.path.join("/") : "");
   
   if (!isAllowed(subpath)) {
     return json({ error: "Forbidden path", path: subpath }, 403);
